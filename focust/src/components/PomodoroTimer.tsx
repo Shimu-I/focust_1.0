@@ -1,46 +1,38 @@
-import { useState, useEffect } from "react";
-import "../App.css";
+// src/components/PomodoroTimer.tsx
+import { useEffect } from 'react';
+import { useTimer } from '../context/TimerContext.tsx';
 
-const PomodoroTimer = () => {
-  const [time, setTime] = useState(25 * 60);
-  const [isRunning, setIsRunning] = useState(false);
+function PomodoroTimer() {
+  const { isRunning, timeLeft, mode, startTimer, pauseTimer, resetTimer } = useTimer();
 
   useEffect(() => {
-    let timer: NodeJS.Timeout;
-    if (isRunning && time > 0) {
-      timer = setInterval(() => setTime((prev) => prev - 1), 1000);
+    let interval: number | null = null; // Should be number | null
+    if (isRunning && timeLeft > 0) {
+      interval = setInterval(() => {}, 1000); // Placeholder logic
     }
-    return () => clearInterval(timer);
-  }, [isRunning, time]);
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [isRunning, timeLeft]);
 
   const formatTime = (seconds: number) => {
-    const m = Math.floor(seconds / 60)
-      .toString()
-      .padStart(2, "0");
-    const s = Math.floor(seconds % 60)
-      .toString()
-      .padStart(2, "0");
-    return `${m}:${s}`;
-  };
-
-  const resetTimer = () => {
-    setIsRunning(false);
-    setTime(25 * 60);
+    const minutes = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
 
   return (
-    <div className="pomodoro-container">
-      <h1 className="title">Focust</h1>
-      <h3 className="subtitle">Pomodoro Focus Timer</h3>
-      <div className="timer-display">{formatTime(time)}</div>
-      <div className="controls">
-        <button onClick={() => setIsRunning(!isRunning)}>
-          {isRunning ? "Pause" : "Start"}
-        </button>
+    <div className="pomodoro-timer">
+      <h2>Pomodoro Timer</h2>
+      <div className="timer-display">{formatTime(timeLeft)}</div>
+      <p>Mode: {mode.charAt(0).toUpperCase() + mode.slice(1)}</p>
+      <div className="timer-controls">
+        <button onClick={startTimer} disabled={isRunning}>Start</button>
+        <button onClick={pauseTimer} disabled={!isRunning}>Pause</button>
         <button onClick={resetTimer}>Reset</button>
       </div>
     </div>
   );
-};
+}
 
 export default PomodoroTimer;
