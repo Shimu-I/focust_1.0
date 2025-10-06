@@ -1,42 +1,98 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+/* Full-page layout */
+.app {
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  color: #f8fafc;
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header bar */
+.header {
+  padding: 1.2rem 2rem;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.header h1 {
+  font-size: 1.8rem;
+  color: #38bdf8;
+  letter-spacing: 1px;
+}
+
+.header span {
+  font-size: 1rem;
+  color: #94a3b8;
+}
+
+/* Main content area */
+.main {
+  flex: 1;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 2rem 5rem;
+}
+
+/* Pomodoro box - larger desktop style */
+.pomodoro-container {
   text-align: center;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 3rem 5rem;
+  border-radius: 25px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s ease-in-out;
+  min-width: 400px;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.pomodoro-container:hover {
+  transform: translateY(-5px);
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.timer-display {
+  font-size: 5rem;
+  font-weight: 600;
+  margin: 2rem 0;
+  color: #38bdf8;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.controls {
+  margin-top: 1rem;
 }
 
-.card {
-  padding: 2em;
+.controls button {
+  margin: 0.5rem;
+  padding: 0.8rem 2rem;
+  border: none;
+  border-radius: 10px;
+  background-color: #38bdf8;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s ease;
 }
 
-.read-the-docs {
-  color: #888;
+.controls button:hover {
+  background-color: #0ea5e9;
+}
+
+/* Optional side panel for future use */
+.sidebar {
+  width: 250px;
+  height: 80%;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #94a3b8;
+  font-size: 1rem;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
 }
